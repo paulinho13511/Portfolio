@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    @apply bg-ink font-sans text-soft antialiased;
+    /* Grid de blueprint: linhas finas a cada 32px e marcações maiores a cada 160px */
+    background-image:
+      linear-gradient(rgba(90, 169, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 169, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(rgba(90, 169, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 169, 255, 0.025) 1px, transparent 1px);
+    background-size:
+      160px 160px,
+      160px 160px,
+      32px 32px,
+      32px 32px;
+    background-position: -1px -1px;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-line bg-panel/80 backdrop-blur-[2px];
+  }
+
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-muted;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded border border-line bg-raised px-2 py-0.5 font-mono text-[11px] text-soft;
+  }
+
+  /* Marcas de canto, como em uma prancha técnica */
+  .corners {
+    @apply relative;
+  }
+  .corners::before,
+  .corners::after {
+    content: '';
+    @apply pointer-events-none absolute h-2.5 w-2.5 border-accent/60;
+  }
+  .corners::before {
+    @apply -left-px -top-px rounded-tl-lg border-l border-t;
+  }
+  .corners::after {
+    @apply -bottom-px -right-px rounded-br-lg border-b border-r;
+  }
+}
